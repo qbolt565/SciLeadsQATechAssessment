@@ -9,19 +9,19 @@ namespace SciLeadsQATechAssessment
 {
     public class RegistrationTests
     {
-        private IWebDriver _driver;
+        private WebApp _webApp;
 
         [SetUp]
         public void Setup()
         {
-            _driver = new ChromeDriver();
-            _driver.Navigate().GoToUrl("");
+            WebApp _webApp = new WebApp();
+            _webApp.Open();
         }
 
         [TearDown]
         public void Teardown()
         {
-            _driver.Close();
+            _webApp.Close();
         }
 
         [Test]
@@ -30,23 +30,23 @@ namespace SciLeadsQATechAssessment
             string email = "user1@test.com";
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new RegistrationPage(_driver);
+            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPasswors(password)
                 .ClickRegister();
 
-            RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage(_driver);
+            RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage(_webApp.Driver);
             registrationConfirmationPage.ClickConfirmLink();
 
-            LoginPage loginPage = new LoginPage(_driver);
+            LoginPage loginPage = new LoginPage(_webApp.Driver);
             loginPage.Open()
                 .EnterUserName(email)
                 .EnterPassword(password)
                 .ClickLogin();
 
-            HomePage homePage = new HomePage(_driver);
+            HomePage homePage = new HomePage(_webApp.Driver);
 
             Assert.That(homePage.UserLoggedInMessageIsDisplayed(email));
         }
@@ -57,20 +57,20 @@ namespace SciLeadsQATechAssessment
             string email = "user1@test.com";
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new RegistrationPage(_driver);
+            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPasswors(password)
                 .ClickRegister();
 
-            LoginPage loginPage = new LoginPage(_driver);
+            LoginPage loginPage = new LoginPage(_webApp.Driver);
             loginPage.Open()
                 .EnterUserName(email)
                 .EnterPassword(password)
                 .ClickLogin();
 
-            HomePage homePage = new HomePage(_driver);
+            HomePage homePage = new HomePage(_webApp.Driver);
 
             Assert.That(homePage.ErrorText(), Is.EqualTo(""));
         }
@@ -81,7 +81,7 @@ namespace SciLeadsQATechAssessment
             string invalidEmail = "!emial";
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new RegistrationPage(_driver);
+            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(invalidEmail)
                 .EnterPassword(password)
@@ -101,7 +101,7 @@ namespace SciLeadsQATechAssessment
         {
             string email = "user1@test.com";
 
-            RegistrationPage registrationPage = new RegistrationPage(_driver);
+            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
@@ -118,7 +118,7 @@ namespace SciLeadsQATechAssessment
             string password = "P@33word";
             string confirmPassword = "P@33word!";
 
-            RegistrationPage registrationPage = new RegistrationPage(_driver);
+            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
