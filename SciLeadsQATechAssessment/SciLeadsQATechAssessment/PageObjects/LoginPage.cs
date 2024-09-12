@@ -26,6 +26,11 @@ namespace SciLeadsQATechAssessment.PageObjects
             throw new NotImplementedException();
         }
 
+        internal string ErrorText()
+        {
+            throw new NotImplementedException();
+        }
+
         internal LoginPage Open()
         {
             throw new NotImplementedException();
