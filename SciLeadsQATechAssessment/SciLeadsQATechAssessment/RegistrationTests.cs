@@ -27,7 +27,7 @@ namespace SciLeadsQATechAssessment
         [Test]
         public void RegistrationPage_EnterValidEmailAndPasswordThenConfirm_CanLoginWithNewCredentials()
         {
-            string email = "user1@test.com";
+            string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
             RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
@@ -54,7 +54,7 @@ namespace SciLeadsQATechAssessment
         [Test]
         public void RegistrationPage_EnterValidEmailAndPasswordDoNotConfirm_CannotLoginWithNewCredentials()
         {
-            string email = "user1@test.com";
+            string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
             RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
@@ -99,7 +99,7 @@ namespace SciLeadsQATechAssessment
         [TestCase("Pas33word", TestName = "Register with password with no symbols.")]
         public void RegistrationPage_EnterInvalidPassword_RegistrationsFails(string password)
         {
-            string email = "user1@test.com";
+            string email = TestDataUtils.GetTestEmail();
 
             RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
             registrationPage.Open()
@@ -114,7 +114,7 @@ namespace SciLeadsQATechAssessment
         [Test]
         public void RegistrationPage_EnterMismatcedPasswords_RegistrationsFails()
         {
-            string email = "user1@test.com";
+            string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
             string confirmPassword = "P@33word!";
 

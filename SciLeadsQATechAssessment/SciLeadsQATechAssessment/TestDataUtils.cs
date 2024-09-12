@@ -9,9 +9,9 @@ namespace SciLeadsQATechAssessment
 {
     public class TestDataUtils
     {
-        //public static string GetRandomEmail()
-        //{ 
-            
-        //}
+        public static string GetTestEmail()
+        {
+            return $"user{DateTime.Now:yyyyMMddhhmmss}@test.com";
+        }
     }
 }
