@@ -7,7 +7,7 @@ using System.Security.Principal;
 
 namespace SciLeadsQATechAssessment
 {
-    public class Tests
+    public class RegistrationTests
     {
         private IWebDriver _driver;
 
