@@ -1,9 +1,15 @@
 ﻿
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SciLeadsQATechAssessment.Locators;
+using SciLeadsQATechAssessment.Support;
 
 namespace SciLeadsQATechAssessment.PageObjects
 {
-    internal class RegistrationConfirmationPage
+    /// <summary>
+    /// Page object for managing interations with Registration Confirmation page.
+    /// </summary>
+    public class RegistrationConfirmationPage
     {
         private IWebDriver _driver;
 
@@ -12,9 +18,27 @@ namespace SciLeadsQATechAssessment.PageObjects
             _driver = driver;
         }
 
-        internal RegistrationConfirmationPage ClickConfirmLink()
+        /// <summary>
+        /// Returns true if the page is displayed.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDisplayed()
         {
-            throw new NotImplementedException();
+            return _driver.IsDisplayed(RegistrationConfirmationLocators.Header, "Is Registration Confirmation page displayed.");
+        }
+
+        /// <summary>
+        /// Click the Confirm Link 
+        /// </summary>
+        /// <returns></returns>
+        public RegistrationConfirmationPage ClickConfirmLink()
+        {
+            _driver.LogClick(RegistrationConfirmationLocators.ConfirmLink, "Click the Confirm link");
+
+            ConfirmPasswordPage confirmPasswordPage = new(_driver);
+            _driver.WaitUntil(confirmPasswordPage.IsDisplayed);
+
+            return this;
         }
     }
 }

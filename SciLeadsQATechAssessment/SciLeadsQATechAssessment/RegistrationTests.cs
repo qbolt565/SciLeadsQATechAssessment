@@ -30,23 +30,27 @@ namespace SciLeadsQATechAssessment
             string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
+            RegistrationPage registrationPage = new(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage(_webApp.Driver);
+            RegistrationConfirmationPage registrationConfirmationPage = new(_webApp.Driver);
             registrationConfirmationPage.ClickConfirmLink();
 
-            LoginPage loginPage = new LoginPage(_webApp.Driver);
+            ConfirmPasswordPage confirmPasswordPage = new(_webApp.Driver);
+
+            Assert.That(confirmPasswordPage.IsDisplayed(), "Confirm password page was not displayed after registration confirmed.");
+
+            LoginPage loginPage = new(_webApp.Driver);
             loginPage.Open()
                 .EnterUserName(email)
                 .EnterPassword(password)
                 .ClickLogin();
 
-            HomePage homePage = new HomePage(_webApp.Driver);
+            HomePage homePage = new(_webApp.Driver);
 
             Assert.That(homePage.UserLoggedInMessageIsDisplayed(email));
         }

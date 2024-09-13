@@ -33,6 +33,10 @@ namespace SciLeadsQATechAssessment.PageObjects
         public RegistrationPage ClickRegister()
         {
             _driver.LogClick(RegistrationLocators.RegisterButton, "Click Register button");
+
+            RegistrationConfirmationPage registrationConfirmationPage = new(_driver);
+            _driver.WaitUntil(registrationConfirmationPage.IsDisplayed);
+
             return this;
         }
 
@@ -116,8 +120,7 @@ namespace SciLeadsQATechAssessment.PageObjects
             NavigationPane navigationPane = new NavigationPane(_driver);
             navigationPane.Open().Register();
 
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            wait.Until(_ => IsDisplayed());
+            _driver.WaitUntil(IsDisplayed);
             
             return this;
         }
