@@ -1,44 +1,125 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SciLeadsQATechAssessment.Locators;
+using SciLeadsQATechAssessment.Support;
 
 namespace SciLeadsQATechAssessment.PageObjects
 {
-    internal class RegistrationPage
+    /// <summary>
+    /// Page object for managing interations with Registration page.
+    /// </summary>
+    public class RegistrationPage
     {
-        private IWebDriver driver;
+        private IWebDriver _driver;
 
         public RegistrationPage(IWebDriver driver)
         {
-            this.driver = driver;
+            _driver = driver;
         }
-
-        internal RegistrationPage ClickRegister()
+        
+        /// <summary>
+        /// Returns true if the page is displayed.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDisplayed()
         {
-            throw new NotImplementedException();
+            return _driver.IsDisplayed(RegistrationLocators.Header, "Check Registration page is displayed.");
         }
 
-        internal RegistrationPage EnterConfirmPasswors(string v)
+        /// <summary>
+        /// Click the register button.
+        /// </summary>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public RegistrationPage ClickRegister()
         {
-            throw new NotImplementedException();
+            _driver.LogClick(RegistrationLocators.RegisterButton, "Click Register button");
+            return this;
         }
 
-        internal RegistrationPage EnterEmail(string v)
+        /// <summary>
+        /// Enter the supplied text into the Confirm Password field.
+        /// </summary>
+        /// <param name="password">Text to be entered into Confirm Password field.</param>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public RegistrationPage EnterConfirmPassword(string password)
         {
-            throw new NotImplementedException();
+            _driver.LogSendText(RegistrationLocators.ConfirmPasswordInput, password, $"Enter {password} into Confirm Password field.");
+            return this;
         }
 
-        internal RegistrationPage EnterPassword(string v)
+        /// <summary>
+        /// Enter the supplied text into the Email field.
+        /// </summary>
+        /// <param name="email">Text to be entered into Email field.</param>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public RegistrationPage EnterEmail(string email)
         {
-            throw new NotImplementedException();
+            _driver.LogSendText(RegistrationLocators.EmailInput, email, $"Enter {email} into Email field.");
+            return this;
         }
 
-        internal string ErrorText()
+        /// <summary>
+        /// Enter the supplied text into the Password field.
+        /// </summary>
+        /// <param name="password">Text to be entered into Password field.</param>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public RegistrationPage EnterPassword(string password)
         {
-            throw new NotImplementedException();
+            _driver.LogSendText(RegistrationLocators.PasswordInput, password, $"Enter {password} into Password field.");
+            return this;
         }
 
+        /// <summary>
+        /// Returns the summary error text at the top of the page.
+        /// </summary>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public string SummaryErrorText()
+        {
+            return _driver.LogReadText(RegistrationLocators.ErrorList, "Get the text displayed in the summary error section at the top of the page.");
+        }
+
+        /// <summary>
+        /// Returns the error next to the email field.
+        /// </summary>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public string EmailErrorText()
+        {
+            return _driver.LogReadText(RegistrationLocators.EmailInputError, "Get the text displayed next to the email error.");
+        }
+
+        /// <summary>
+        /// Returns the error next to the password field.
+        /// </summary>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public string PasswordErrorText()
+        {
+            return _driver.LogReadText(RegistrationLocators.PasswordInputError, "Get the text displayed next to the password error.");
+        }
+
+
+
+        /// <summary>
+        /// Returns the error next to the confirm password field.
+        /// </summary>
+        /// <returns>Returns the same instance of the Registration page.</returns>
+        public string PasswordConfirmErrorText()
+        {
+            return _driver.LogReadText(RegistrationLocators.ConfirmPasswordInput, "Get the text displayed next to the cofirm password error.");
+        }
+
+        /// <summary>
+        /// Opens the registration page from the Navigation pane.
+        /// </summary>
+        /// <returns>Returns the same instance of the Registration page.</returns>
         internal RegistrationPage Open()
         {
-            throw new NotImplementedException();
+            NavigationPane navigationPane = new NavigationPane(_driver);
+            navigationPane.Open().Register();
+
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            wait.Until(_ => IsDisplayed());
+            
+            return this;
         }
     }
 }

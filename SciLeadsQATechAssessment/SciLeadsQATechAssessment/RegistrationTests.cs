@@ -14,7 +14,7 @@ namespace SciLeadsQATechAssessment
         [SetUp]
         public void Setup()
         {
-            WebApp _webApp = new WebApp();
+            _webApp = new WebApp();
             _webApp.Open();
         }
 
@@ -34,7 +34,7 @@ namespace SciLeadsQATechAssessment
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
-                .EnterConfirmPasswors(password)
+                .EnterConfirmPassword(password)
                 .ClickRegister();
 
             RegistrationConfirmationPage registrationConfirmationPage = new RegistrationConfirmationPage(_webApp.Driver);
@@ -61,7 +61,7 @@ namespace SciLeadsQATechAssessment
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
-                .EnterConfirmPasswors(password)
+                .EnterConfirmPassword(password)
                 .ClickRegister();
 
             LoginPage loginPage = new LoginPage(_webApp.Driver);
@@ -85,10 +85,13 @@ namespace SciLeadsQATechAssessment
             registrationPage.Open()
                 .EnterEmail(invalidEmail)
                 .EnterPassword(password)
-                .EnterConfirmPasswors(password)
+                .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            Assert.That(registrationPage.ErrorText(), Is.EqualTo(""));
+            Assert.Multiple(() => {
+                Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo("The Email field is not a valid e-mail address."));
+                Assert.That(registrationPage.EmailErrorText, Is.EqualTo("The Email field is not a valid e-mail address."));
+            });
         }
 
         [TestCase("P@33wor", TestName = "Regsiter with password that is too short.")]
@@ -105,10 +108,10 @@ namespace SciLeadsQATechAssessment
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
-                .EnterConfirmPasswors(password)
+                .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            Assert.That(registrationPage.ErrorText(), Is.EqualTo(""));
+            Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo(""));
         }
 
         [Test]
@@ -122,10 +125,10 @@ namespace SciLeadsQATechAssessment
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
-                .EnterConfirmPasswors(confirmPassword)
+                .EnterConfirmPassword(confirmPassword)
                 .ClickRegister();
 
-            Assert.That(registrationPage.ErrorText(), Is.EqualTo(""));
+            Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo(""));
         }
 
     }
