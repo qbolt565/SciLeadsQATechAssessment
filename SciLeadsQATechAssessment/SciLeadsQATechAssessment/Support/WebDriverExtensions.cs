@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,18 @@ namespace SciLeadsQATechAssessment.Support
 
             element = null;
             return false;
+        }
+
+        /// <summary>
+        /// Waits until the given condition is met or the timeout is reached.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="condition">Condition to wait until valid.</param>
+        /// <param name="timeout">Maximum number of seconds to wait before wait ends.</param>
+        public static void WaitUntil(this IWebDriver driver, Func<bool> condition, int timeout = 5)
+        {
+            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(timeout));
+            wait.Until(_ => condition());
         }
     }
 }
