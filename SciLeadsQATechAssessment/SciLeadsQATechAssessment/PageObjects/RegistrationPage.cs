@@ -29,15 +29,16 @@ namespace SciLeadsQATechAssessment.PageObjects
         /// <summary>
         /// Click the register button.
         /// </summary>
-        /// <returns>Returns the same instance of the Registration page.</returns>
-        public RegistrationPage ClickRegister()
+        /// <param name="waitForRegistrationConfirmationPage">If true the test will pause the execution until the Registration Confirmation page is displayed.</param>
+        public void ClickRegister(bool waitForRegistrationConfirmationPage = true)
         {
             _driver.LogClick(RegistrationLocators.RegisterButton, "Click Register button");
 
-            RegistrationConfirmationPage registrationConfirmationPage = new(_driver);
-            _driver.WaitUntil(registrationConfirmationPage.IsDisplayed);
-
-            return this;
+            if (waitForRegistrationConfirmationPage)
+            {
+                RegistrationConfirmationPage registrationConfirmationPage = new(_driver);
+                _driver.WaitUntil(registrationConfirmationPage.IsDisplayed);
+            }
         }
 
         /// <summary>
@@ -76,39 +77,49 @@ namespace SciLeadsQATechAssessment.PageObjects
         /// <summary>
         /// Returns the summary error text at the top of the page.
         /// </summary>
-        /// <returns>Returns the same instance of the Registration page.</returns>
+        /// <returns>Error text.</returns>
         public string SummaryErrorText()
         {
             return _driver.LogReadText(RegistrationLocators.ErrorList, "Get the text displayed in the summary error section at the top of the page.");
         }
 
         /// <summary>
-        /// Returns the error next to the email field.
+        /// Returns the error next to the email input.
         /// </summary>
-        /// <returns>Returns the same instance of the Registration page.</returns>
+        /// <returns>Error text.</returns>
         public string EmailErrorText()
         {
-            return _driver.LogReadText(RegistrationLocators.EmailInputError, "Get the text displayed next to the email error.");
+            return _driver.LogReadText(RegistrationLocators.EmailInputError, "Get the error text displayed next to the email input.");
         }
 
         /// <summary>
-        /// Returns the error next to the password field.
+        /// Returns the error next to the password input.
         /// </summary>
-        /// <returns>Returns the same instance of the Registration page.</returns>
+        /// <returns>Error text.</returns>
         public string PasswordErrorText()
         {
-            return _driver.LogReadText(RegistrationLocators.PasswordInputError, "Get the text displayed next to the password error.");
+            return _driver.LogReadText(RegistrationLocators.PasswordInputError, "Get the error text displayed next to the password input.");
         }
 
 
 
         /// <summary>
-        /// Returns the error next to the confirm password field.
+        /// Returns the error next to the confirm password input.
         /// </summary>
-        /// <returns>Returns the same instance of the Registration page.</returns>
+        /// <returns>Error text.</returns>
         public string PasswordConfirmErrorText()
         {
-            return _driver.LogReadText(RegistrationLocators.ConfirmPasswordInput, "Get the text displayed next to the cofirm password error.");
+            return _driver.LogReadText(RegistrationLocators.ConfirmPasswordInputError, "Get the error text displayed next to the confirm password input.");
+        }
+
+
+        /// <summary>
+        /// Returns the text displayed in the displayed alert.
+        /// </summary>
+        /// <returns>Error text.</returns>
+        public string AlertText()
+        {
+            return _driver.LogReadText(RegistrationLocators.Alert, "Get the text displayed in the alert box.");
         }
 
         /// <summary>

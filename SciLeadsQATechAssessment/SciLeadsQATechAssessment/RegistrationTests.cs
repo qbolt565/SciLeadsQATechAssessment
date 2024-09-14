@@ -46,13 +46,13 @@ namespace SciLeadsQATechAssessment
 
             LoginPage loginPage = new(_webApp.Driver);
             loginPage.Open()
-                .EnterUserName(email)
+                .EnterEmail(email)
                 .EnterPassword(password)
                 .ClickLogin();
 
             HomePage homePage = new(_webApp.Driver);
 
-            Assert.That(homePage.UserLoggedInMessageIsDisplayed(email));
+            Assert.That(homePage.IsLoggedIn(email), "The user was not successfully logged in.");
         }
 
         [Test]
@@ -61,22 +61,20 @@ namespace SciLeadsQATechAssessment
             string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
+            RegistrationPage registrationPage = new(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            LoginPage loginPage = new LoginPage(_webApp.Driver);
+            LoginPage loginPage = new(_webApp.Driver);
             loginPage.Open()
-                .EnterUserName(email)
+                .EnterEmail(email)
                 .EnterPassword(password)
                 .ClickLogin();
 
-            HomePage homePage = new HomePage(_webApp.Driver);
-
-            Assert.That(homePage.ErrorText(), Is.EqualTo(""));
+            Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."), "Expected error message was not dislayed when attempting to login non confirmed user.");
         }
 
         [Test]
@@ -85,12 +83,12 @@ namespace SciLeadsQATechAssessment
             string invalidEmail = "!emial";
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
+            RegistrationPage registrationPage = new(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(invalidEmail)
                 .EnterPassword(password)
                 .EnterConfirmPassword(password)
-                .ClickRegister();
+                .ClickRegister(waitForRegistrationConfirmationPage: false);
 
             Assert.Multiple(() => {
                 Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo("The Email field is not a valid e-mail address."));
@@ -98,41 +96,93 @@ namespace SciLeadsQATechAssessment
             });
         }
 
-        [TestCase("P@33wor", TestName = "Regsiter with password that is too short.")]
-        [TestCase("yR4yUS.YbG-#%U)kLf}$QaZRJ(2qhF7Z}JUD_gy[]mH4uPR$FTeHfN4TG(NyU)3rp]$86*TnD_Cd)kefX-3;-(xZyT}Mn]e0R@u&A", TestName = "Regsiter with password that is too long.")]
-        [TestCase("p@33word", TestName = "Regsiter with password that is all in a single case.")]
-        [TestCase("1234567!", TestName = "Register with pasword that has no alphabetic characters.")]
-        [TestCase("P@ssword", TestName = "Register with password with no numbers.")]
-        [TestCase("Pas33word", TestName = "Register with password with no symbols.")]
-        public void RegistrationPage_EnterInvalidPassword_RegistrationsFails(string password)
+        [TestCase("p@33word", "Error: Passwords must have at least one uppercase ('A'-'Z').", TestName = "Regsiter with password that is all in a single case.")]
+        [TestCase("1234567!", "Error: Passwords must have at least one lowercase ('a'-'z')., Passwords must have at least one uppercase ('A'-'Z').", TestName = "Register with pasword that has no alphabetic characters.")]
+        [TestCase("P@ssword", "Error: Passwords must have at least one digit ('0'-'9').", TestName = "Register with password with no numbers.")]
+        [TestCase("Pas33word", "Error: Passwords must have at least one non alphanumeric character.", TestName = "Register with password with no symbols.")]
+        public void RegistrationPage_EnterInvalidPasswordWithIncorrectCharacters_RegistrationsFailsWithSingleError(string password, string error)
         {
             string email = TestDataUtils.GetTestEmail();
 
-            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
+            RegistrationPage registrationPage = new(_webApp.Driver);
+            registrationPage.Open()
+                .EnterEmail(email)
+                .EnterPassword(password)
+                .EnterConfirmPassword(password)
+                .ClickRegister(waitForRegistrationConfirmationPage: false);
+
+            Assert.That(registrationPage.AlertText(), Is.EqualTo(error));
+        }
+
+        [TestCase("P@33wor", "The Password must be at least 8 and at max 100 characters long.", TestName = "Regsiter with password that is too short.")]
+        [TestCase("yR4yUS.YbG-#%U)kLf}$QaZRJ(2qhF7Z}JUD_gy[]mH4uPR$FTeHfN4TG(NyU)3rp]$86*TnD_Cd)kefX-3;-(xZyT}Mn]e0R@u&A", "The Password must be at least 8 and at max 100 characters long.", TestName = "Regsiter with password that is too long.")]
+        public void RegistrationPage_EnterInvalidPasswordWithWrongLength_RegistrationsFailsWithMultipleErrors(string password, string error)
+        {
+            string email = TestDataUtils.GetTestEmail();
+
+            RegistrationPage registrationPage = new(_webApp.Driver);
+            registrationPage.Open()
+                .EnterEmail(email)
+                .EnterPassword(password)
+                .EnterConfirmPassword(password)
+                .ClickRegister(waitForRegistrationConfirmationPage: false);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(registrationPage.PasswordErrorText, Is.EqualTo(error));
+                Assert.That(registrationPage.SummaryErrorText(), Does.EndWith(error));
+            });
+        }
+
+        [Test]
+        public void RegistrationPage_EnterMismatchedPasswords_RegistrationsFails()
+        {
+            string email = TestDataUtils.GetTestEmail();
+            string password = "P@33word";
+            string confirmPassword = "P@33word!";
+            string error = "The password and confirmation password do not match.";
+
+            RegistrationPage registrationPage = new(_webApp.Driver);
+            registrationPage.Open()
+                .EnterEmail(email)
+                .EnterPassword(password)
+                .EnterConfirmPassword(confirmPassword)
+                .ClickRegister(waitForRegistrationConfirmationPage: false);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(registrationPage.PasswordConfirmErrorText, Is.EqualTo(error));
+                Assert.That(registrationPage.SummaryErrorText(), Does.EndWith(error));
+            });
+        }
+
+        [Test]
+        public void RegistrationPage_EnterEmailThatHasAlreadyBeenRegistered_CanLoginWithNewCredentials()
+        {
+            string email = TestDataUtils.GetTestEmail();
+            string password = "P@33word";
+
+            RegistrationPage registrationPage = new(_webApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo(""));
-        }
+            RegistrationConfirmationPage registrationConfirmationPage = new(_webApp.Driver);
+            registrationConfirmationPage.ClickConfirmLink();
 
-        [Test]
-        public void RegistrationPage_EnterMismatcedPasswords_RegistrationsFails()
-        {
-            string email = TestDataUtils.GetTestEmail();
-            string password = "P@33word";
-            string confirmPassword = "P@33word!";
+            ConfirmPasswordPage confirmPasswordPage = new(_webApp.Driver);
 
-            RegistrationPage registrationPage = new RegistrationPage(_webApp.Driver);
+            Assert.That(confirmPasswordPage.IsDisplayed(), "Confirm password page was not displayed after registration confirmed.");
+
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
-                .EnterConfirmPassword(confirmPassword)
-                .ClickRegister();
+                .EnterConfirmPassword(password)
+                .ClickRegister(waitForRegistrationConfirmationPage: false);
 
-            Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo(""));
+            Assert.That(registrationPage.AlertText(), Is.EqualTo($"Error: Username '{email}' is already taken."));
         }
 
     }

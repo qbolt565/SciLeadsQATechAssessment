@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SciLeadsQATechAssessment.Locators
 {
+    /// <summary>
+    /// Provides locators for all elements contained within the Registration page.
+    /// </summary>
     public class RegistrationLocators
     {
         public static By Header => By.XPath("//h1[text()='Register']");
@@ -17,6 +20,7 @@ namespace SciLeadsQATechAssessment.Locators
         public static By ErrorList => By.XPath("//form/ul[@class='text-danger']");
         public static By EmailInputError => By.XPath("//input[@name='Input.Email']/../div[@class='text-danger']");
         public static By PasswordInputError => By.XPath("//input[@name='Input.Password']/../div[@class='text-danger']");
-
+        public static By ConfirmPasswordInputError => By.XPath("//input[@name='Input.ConfirmPassword']/../div[@class='text-danger']");
+        public static By Alert => By.XPath("//div[@class='alert alert-danger']");
     }
 }
