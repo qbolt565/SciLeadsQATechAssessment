@@ -3,6 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -142,6 +143,45 @@ namespace SciLeadsQATechAssessment.Support
         {
             log.LogInfo("Wait for page to load");
             driver.WaitUntil(driver.IsPageLoaded);
+        }
+
+        public static List<List<string>> LoadTable(this IWebDriver driver, By locator)
+        { 
+            log.LogInfo($"Load table");
+
+            List<List<string>> table = [];
+
+            driver.WaitUntil(() => driver.IsDisplayed(locator, "Check table is displayed."));
+            driver.WaitUntil(() => driver.TableRowCount(locator) > 0);
+
+            IWebElement tableElement = driver.FindElement(locator);
+            var rowElements = tableElement.FindElements(By.XPath("./tbody/tr"));
+            
+            foreach (var rowElement in rowElements)
+            {
+                List<string> row = [];
+                var dataElements = rowElement.FindElements(By.XPath("./td"));
+             
+                foreach (var dataElement in dataElements)
+                {
+                    row.Add(dataElement.Text);
+                }
+
+                table.Add(row);            }
+
+            return table;
+        }
+
+        /// <summary>
+        /// Returns the count of rows in a table.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="locator">Locator specifying how to find table.</param>
+        /// <returns></returns>
+        public static int TableRowCount(this IWebDriver driver, By locator)
+        {
+            IWebElement table = driver.FindElement(locator);
+            return table.FindElements(By.XPath("./tbody/tr")).Count;
         }
     }
 }
