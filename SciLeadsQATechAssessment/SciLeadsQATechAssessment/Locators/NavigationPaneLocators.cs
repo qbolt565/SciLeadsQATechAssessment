@@ -17,7 +17,7 @@ namespace SciLeadsQATechAssessment.Locators
         public static By Weather => NavItemLocator("Weather");
         public static By Register => NavItemLocator("Register");
         public static By Login => NavItemLocator("Login");
-        public static By Logout => NavItemLocator("Logout");
+        public static By Logout => By.XPath("//nav//button[contains(text(),'Logout')]");
 
         /// <summary>
         /// Provides the locator for the tab for accessing the users profile

@@ -45,5 +45,19 @@ namespace SciLeadsQATechAssessment.PageObjects
             IWebElement article = _driver.FindElement(HomepageLocators.Article);
             return article.Text.Contains($"Login or Register to continue.");
         }
+
+        /// <summary>
+        /// Opens the Home page from the Navigation pane.
+        /// </summary>
+        /// <returns>The same instance of <see cref="HomePage"/>.</returns>
+        public HomePage Open()
+        {
+            NavigationPane navigationPane = new(_driver);
+            navigationPane.Open().Home();
+
+            _driver.WaitUntil(IsDisplayed);
+
+            return this;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace SciLeadsQATechAssessment.Support
         {
             log.LogInfo(logMessage);
             IWebElement element = driver.FindElement(locator);
+            new Actions(driver).MoveToElement(element);
             element.Click();
         }
 
@@ -66,10 +68,23 @@ namespace SciLeadsQATechAssessment.Support
         public static bool IsDisplayed(this IWebDriver driver, By locator, string logMessage)
         {
             log.LogInfo(logMessage);
+            int retryCount = 3;
 
-            if (driver.TryFindElement(locator, out IWebElement element))
+            while (retryCount > 0)
             {
-                return element.Displayed;
+                try
+                {
+                    if (driver.TryFindElement(locator, out IWebElement element))
+                    {
+                        return element.Displayed;
+                    }
+                }
+                catch (StaleElementReferenceException) 
+                {
+                    log.LogWarning($"Encountered StaleElementReferenceException attempting retry.  Attempts remaining:{retryCount}");
+                    retryCount--;
+                }
+                retryCount = 0;
             }
 
             return false;
@@ -106,6 +121,27 @@ namespace SciLeadsQATechAssessment.Support
         {
             WebDriverWait wait = new(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(_ => condition());
+        }
+
+        /// <summary>
+        /// Checks to see if the document readystate is true.
+        /// </summary>
+        /// <param name="driver"></param>
+        public static bool IsPageLoaded(this IWebDriver driver)
+        {
+            return ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete");
+        }
+
+        /// <summary>
+        /// Wait until the document readystate is true.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="timeout">Maximum number of seconds to wait before wait ends.</param>
+
+        public static void WaitForPageToLoad(this IWebDriver driver, int timeout = 10)
+        {
+            log.LogInfo("Wait for page to load");
+            driver.WaitUntil(driver.IsPageLoaded);
         }
     }
 }

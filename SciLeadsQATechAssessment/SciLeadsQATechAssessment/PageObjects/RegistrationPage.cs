@@ -125,7 +125,7 @@ namespace SciLeadsQATechAssessment.PageObjects
         /// Opens the registration page from the Navigation pane.
         /// </summary>
         /// <returns>Returns the same instance of the Registration page.</returns>
-        internal RegistrationPage Open()
+        public RegistrationPage Open()
         {
             NavigationPane navigationPane = new NavigationPane(_driver);
             navigationPane.Open().Register();
