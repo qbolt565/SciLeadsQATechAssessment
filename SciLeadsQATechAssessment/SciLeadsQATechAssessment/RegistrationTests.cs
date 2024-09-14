@@ -157,7 +157,7 @@ namespace SciLeadsQATechAssessment
         }
 
         [Test]
-        public void RegistrationPage_EnterEmailThatHasAlreadyBeenRegistered_CanLoginWithNewCredentials()
+        public void RegistrationPage_EnterEmailThatHasAlreadyBeenRegistered_RegistrationFails()
         {
             string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";

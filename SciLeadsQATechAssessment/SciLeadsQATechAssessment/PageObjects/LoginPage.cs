@@ -95,10 +95,40 @@ namespace SciLeadsQATechAssessment.PageObjects
         /// <returns>Error text.</returns>
         public string AlertText()
         {
+            _driver.WaitUntil(() => _driver.IsDisplayed(RegistrationLocators.Alert, "Check alert is displayed."));
             return _driver.LogReadText(LoginLocators.Alert, "Get the text displayed in the error box.");
         }
 
+        /// <summary>
+        /// Clicks the Forgot your password link
+        /// </summary>
+        /// <returns></returns>
+        public void ClickForgotYourPassword()
+        {
+            _driver.LogClick(LoginLocators.ForgotPasswordLink, "Click Forgot your password link");
+            throw new NotImplementedException();
+        }
 
+        /// <summary>
+        /// Clicks the Register as a new user link
+        /// </summary>
+        public void ClickRegisterAsANewUser()
+        {
+            _driver.LogClick(LoginLocators.RegisterNewUserLink, "Click Register as a new user link");
+
+            RegistrationPage registrationPage = new(_driver);
+            _driver.WaitUntil(registrationPage.IsDisplayed);
+        }
+
+        /// <summary>
+        /// Clicks the Resend email confirmation link
+        /// </summary>
+        public void ClickResendEmailConfirmationLink()
+        {
+            _driver.LogClick(LoginLocators.RegisterNewUserLink, "Click Resend email confirmation link");
+
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Opens the login page from the Navigation pane.
