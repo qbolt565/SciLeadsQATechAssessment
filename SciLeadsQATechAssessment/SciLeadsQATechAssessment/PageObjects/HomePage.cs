@@ -1,24 +1,49 @@
 ﻿using OpenQA.Selenium;
+using SciLeadsQATechAssessment.Locators;
+using SciLeadsQATechAssessment.Support;
 
 namespace SciLeadsQATechAssessment.PageObjects
 {
-    internal class HomePage
+    /// <summary>
+    /// Page object for managing interations with the Home page.
+    /// </summary>
+    public class HomePage
     {
-        private IWebDriver driver;
+        private IWebDriver _driver;
 
         public HomePage(IWebDriver driver)
         {
-            this.driver = driver;
+            this._driver = driver;
         }
 
-        internal string ErrorText()
+        /// <summary>
+        /// Returns true if the page is displayed.
+        /// </summary>
+        /// <returns>Returns the same instance of the Login page.</returns>
+        public bool IsDisplayed()
         {
-            throw new NotImplementedException();
+            return _driver.IsDisplayed(HomepageLocators.Header, "Check Home page is displayed.");
         }
 
-        internal bool UserLoggedInMessageIsDisplayed(string email)
+        /// <summary>
+        /// Checks if "You are logged in as <useremail>" message is displayed.
+        /// </summary>
+        /// <param name="email">Email of the user</param>
+        /// <returns>True if message displayed.</returns>
+        public bool IsLoggedIn(string email)
         {
-            throw new NotImplementedException();
+            IWebElement article =  _driver.FindElement(HomepageLocators.Article);
+            return article.Text.Contains($"You are logged in as {email}.");
+        }
+
+        /// <summary>
+        /// Checks if "Login or Register to continue." message is displayed.
+        /// </summary>
+        /// <returns>True if message displayed.</returns>
+        public bool IsNotLoggedIn()
+        {
+            IWebElement article = _driver.FindElement(HomepageLocators.Article);
+            return article.Text.Contains($"Login or Register to continue.");
         }
     }
 }

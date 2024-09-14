@@ -33,8 +33,11 @@ namespace SciLeadsQATechAssessment
 
             loginPage.Open()
                 .ClickLogin();
-
-            Assert.That(loginPage.ErrorText(), Is.EqualTo(""));
+            Assert.Multiple(() => {
+                Assert.That(loginPage.SummaryErrorText, Is.EqualTo(""));
+                Assert.That(loginPage.EmailErrorText, Is.EqualTo(""));
+                Assert.That(loginPage.PasswordErrorText, Is.EqualTo(""));
+            });
         }
 
         [Test]
