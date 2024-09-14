@@ -66,5 +66,38 @@ namespace SciLeadsQATechAssessment.Tests
             Assert.That(registrationPage.IsDisplayed(), "Registration page was not displayed.");
         }
 
+        [Test]
+        public void ForgotPassword_EmailMatchesExistingUser_ConfirmationDisplayed()
+        {
+            LoginPage login = new(WebApp.Driver);
+            login.Open()
+                .ClickForgotYourPassword();
+
+            ForgotPasswordPage forgotPasswordPage = new(WebApp.Driver);
+            forgotPasswordPage.EnterEmail(KnownUser.Email)
+                .ClickResetPassworsButton();
+
+            ForgotPasswordConfirmationPage forgotPasswordConfirmationPage = new(WebApp.Driver);
+            Assert.That(forgotPasswordConfirmationPage.IsDisplayed(), "Forgot password confirmation page was not displayed.");
+        }
+
+        [Test]
+        public void ForgotPassword_EmailDoesNotMatchExistingUser_ConfirmationDisplayed()
+        {
+            string unregisteredEmail = TestDataUtils.GetTestEmail();
+
+            LoginPage login = new(WebApp.Driver);
+            login.Open()
+                .ClickForgotYourPassword();
+
+            ForgotPasswordPage forgotPasswordPage = new(WebApp.Driver);
+            forgotPasswordPage.EnterEmail(unregisteredEmail)
+                .ClickResetPassworsButton();
+
+            ForgotPasswordConfirmationPage forgotPasswordConfirmationPage = new(WebApp.Driver);
+            Assert.That(forgotPasswordConfirmationPage.IsDisplayed(), "Forgot password confirmation page was not displayed.");
+        }
+
+
     }
 }

@@ -106,7 +106,9 @@ namespace SciLeadsQATechAssessment.PageObjects
         public void ClickForgotYourPassword()
         {
             _driver.LogClick(LoginLocators.ForgotPasswordLink, "Click Forgot your password link");
-            throw new NotImplementedException();
+
+            ForgotPasswordPage forgotPasswordPage = new(_driver);
+            _driver.WaitUntil(forgotPasswordPage.IsDisplayed);
         }
 
         /// <summary>
