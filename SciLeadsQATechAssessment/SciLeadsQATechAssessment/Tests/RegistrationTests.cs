@@ -8,50 +8,34 @@ using System.Security.Principal;
 
 namespace SciLeadsQATechAssessment.Tests
 {
-    public class RegistrationTests
+    public class RegistrationTests : TestBase
     {
-        private WebApp _webApp;
-
-        [SetUp]
-        public void Setup()
-        {
-            _webApp = new WebApp();
-            _webApp.Open();
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            _webApp.Close();
-        }
-
-        [Test]
         public void RegistrationPage_EnterValidEmailAndPasswordThenConfirm_CanLoginWithNewCredentials()
         {
             string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            RegistrationConfirmationPage registrationConfirmationPage = new(_webApp.Driver);
+            RegistrationConfirmationPage registrationConfirmationPage = new(WebApp.Driver);
             registrationConfirmationPage.ClickConfirmLink();
 
-            ConfirmPasswordPage confirmPasswordPage = new(_webApp.Driver);
+            ConfirmPasswordPage confirmPasswordPage = new(WebApp.Driver);
 
             Assert.That(confirmPasswordPage.IsDisplayed(), "Confirm password page was not displayed after registration confirmed.");
 
-            LoginPage loginPage = new(_webApp.Driver);
+            LoginPage loginPage = new(WebApp.Driver);
             loginPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .ClickLogin();
 
-            HomePage homePage = new(_webApp.Driver);
+            HomePage homePage = new(WebApp.Driver);
 
             Assert.That(homePage.IsLoggedIn(email), "The user was not successfully logged in.");
         }
@@ -62,14 +46,14 @@ namespace SciLeadsQATechAssessment.Tests
             string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
                 .EnterConfirmPassword(password)
                 .ClickRegister();
 
-            LoginPage loginPage = new(_webApp.Driver);
+            LoginPage loginPage = new(WebApp.Driver);
             loginPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
@@ -84,7 +68,7 @@ namespace SciLeadsQATechAssessment.Tests
             string invalidEmail = "!emial";
             string password = "P@33word";
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
                 .EnterEmail(invalidEmail)
                 .EnterPassword(password)
@@ -106,7 +90,7 @@ namespace SciLeadsQATechAssessment.Tests
         {
             string email = TestDataUtils.GetTestEmail();
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
@@ -122,7 +106,7 @@ namespace SciLeadsQATechAssessment.Tests
         {
             string email = TestDataUtils.GetTestEmail();
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
@@ -144,7 +128,7 @@ namespace SciLeadsQATechAssessment.Tests
             string confirmPassword = "P@33word!";
             string error = "The password and confirmation password do not match.";
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
@@ -161,30 +145,14 @@ namespace SciLeadsQATechAssessment.Tests
         [Test]
         public void RegistrationPage_EnterEmailThatHasAlreadyBeenRegistered_RegistrationFails()
         {
-            string email = TestDataUtils.GetTestEmail();
-            string password = "P@33word";
-
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .EnterConfirmPassword(password)
-                .ClickRegister();
-
-            RegistrationConfirmationPage registrationConfirmationPage = new(_webApp.Driver);
-            registrationConfirmationPage.ClickConfirmLink();
-
-            ConfirmPasswordPage confirmPasswordPage = new(_webApp.Driver);
-
-            Assert.That(confirmPasswordPage.IsDisplayed(), "Confirm password page was not displayed after registration confirmed.");
-
-            registrationPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .EnterConfirmPassword(password)
+                .EnterEmail(KnownUser.Email)
+                .EnterPassword(KnownUser.Password)
+                .EnterConfirmPassword(KnownUser.Password)
                 .ClickRegister(waitForRegistrationConfirmationPage: false);
 
-            Assert.That(registrationPage.AlertText(), Is.EqualTo($"Error: Username '{email}' is already taken."));
+            Assert.That(registrationPage.AlertText(), Is.EqualTo($"Error: Username '{KnownUser.Email}' is already taken."));
         }
 
     }

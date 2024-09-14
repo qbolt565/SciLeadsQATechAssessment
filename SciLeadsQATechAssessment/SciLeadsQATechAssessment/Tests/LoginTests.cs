@@ -11,42 +11,12 @@ using SciLeadsQATechAssessment.Support;
 
 namespace SciLeadsQATechAssessment.Tests
 {
-    public class LoginTests
+    public class LoginTests : TestBase
     {
-        private WebApp _webApp;
-        private User _knownUser;
-
-        [OneTimeSetUp]
-        public void OneTimeSetup()
-        {
-            _knownUser = TestDataUtils.GetTestUser();
-
-            _webApp = new WebApp();
-            _webApp.Open();
-
-            Workflows workflows = new Workflows();
-            workflows.CreateNewUser(_webApp.Driver, _knownUser);
-
-            _webApp.Close();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            _webApp = new WebApp();
-            _webApp.Open();
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            _webApp.Close();
-        }
-
         [Test]
         public void LoginPage_ClickLogInWithNoCredentails_LoginFails()
         {
-            LoginPage loginPage = new(_webApp.Driver);
+            LoginPage loginPage = new(WebApp.Driver);
 
             loginPage.Open()
                 .ClickLogin();
@@ -64,7 +34,7 @@ namespace SciLeadsQATechAssessment.Tests
             string email = TestDataUtils.GetTestEmail();
             string password = "P@33word";
 
-            LoginPage loginPage = new(_webApp.Driver);
+            LoginPage loginPage = new(WebApp.Driver);
             loginPage.Open()
                 .EnterEmail(email)
                 .EnterPassword(password)
@@ -76,10 +46,10 @@ namespace SciLeadsQATechAssessment.Tests
         [Test]
         public void LoginPage_ClickLoginWithKnownEmailButWrongPassword_LoginFails()
         {
-            LoginPage loginPage = new(_webApp.Driver);
+            LoginPage loginPage = new(WebApp.Driver);
             loginPage.Open()
-                .EnterEmail(_knownUser.Email)
-                .EnterPassword($"!{_knownUser.Password}")
+                .EnterEmail(KnownUser.Email)
+                .EnterPassword($"!{KnownUser.Password}")
                 .ClickLogin();
 
             Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."));
@@ -88,11 +58,11 @@ namespace SciLeadsQATechAssessment.Tests
         [Test]
         public void LoginPage_ClickRegisterNewUser_RegistrationPageDisplayed()
         {
-            LoginPage loginPage = new(_webApp.Driver);
+            LoginPage loginPage = new(WebApp.Driver);
             loginPage.Open()
                 .ClickRegisterAsANewUser();
 
-            RegistrationPage registrationPage = new(_webApp.Driver);
+            RegistrationPage registrationPage = new(WebApp.Driver);
             Assert.That(registrationPage.IsDisplayed(), "Registration page was not displayed.");
         }
 
