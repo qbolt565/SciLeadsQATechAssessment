@@ -1,9 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SciLeadsQATechAssessment.Locators
 {
@@ -14,5 +9,6 @@ namespace SciLeadsQATechAssessment.Locators
     {
         public static By Header => By.XPath("//h1[text()='Register confirmation']");
         public static By ConfirmLink => By.LinkText("Click here to confirm your account");
+        public static By Alert => By.XPath("//div[@class='alert alert-danger']");
     }
 }

@@ -112,9 +112,8 @@ namespace SciLeadsQATechAssessment.PageObjects
             return _driver.LogReadText(RegistrationLocators.ConfirmPasswordInputError, "Get the error text displayed next to the confirm password input.");
         }
 
-
         /// <summary>
-        /// Returns the text displayed in the displayed alert.
+        /// Returns the text displayed in the alert.
         /// </summary>
         /// <returns>Error text.</returns>
         public string AlertText()

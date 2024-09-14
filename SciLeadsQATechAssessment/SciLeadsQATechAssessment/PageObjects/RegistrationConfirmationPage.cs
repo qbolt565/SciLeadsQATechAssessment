@@ -40,5 +40,23 @@ namespace SciLeadsQATechAssessment.PageObjects
 
             return this;
         }
+
+        /// <summary>
+        /// Check if an alert has been displayed.
+        /// </summary>
+        /// <returns>Retruns true if an alert is displayed.</returns>
+        public bool IsAlertDisplayed()
+        {
+            return _driver.TryFindElement(RegistrationConfirmationLocators.Alert, out _);
+        }
+
+        /// <summary>
+        /// Returns the text displayed in the alert.
+        /// </summary>
+        /// <returns>Error text.</returns>
+        public string AlertText()
+        {
+            return _driver.LogReadText(RegistrationConfirmationLocators.Alert, "Get the text displayed in the alert box.");
+        }
     }
 }

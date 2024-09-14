@@ -98,6 +98,40 @@ namespace SciLeadsQATechAssessment.Tests
             Assert.That(forgotPasswordConfirmationPage.IsDisplayed(), "Forgot password confirmation page was not displayed.");
         }
 
+        [Test]
+        public void ResendEmailConfirmation_EmailMatchesExistingUser_RegisterConfirmationDisplayed()
+        {
+            LoginPage login = new(WebApp.Driver);
+            login.Open()
+                .ClickResendEmailConfirmationLink();
+
+            ResendEmailConfirmationPage resendEmailConfirmationPage = new(WebApp.Driver);
+            resendEmailConfirmationPage.EnterEmail(KnownUser.Email)
+                .ClickResendButton();
+
+            RegistrationConfirmationPage registrationConfirmationPage = new(WebApp.Driver);
+            Assert.That(!registrationConfirmationPage.IsAlertDisplayed(), "Registration confirmation page is unexpectedly showing an error.");
+        }
+
+
+
+        [Test]
+        public void ResendEmailConfirmation_EmailDoesNotMatchExistingUser_RegisterConfirmationDisplayed()
+        {
+            string unregisteredEmail = TestDataUtils.GetTestEmail();
+
+            LoginPage login = new(WebApp.Driver);
+            login.Open()
+                .ClickResendEmailConfirmationLink();
+
+            ResendEmailConfirmationPage resendEmailConfirmationPage = new(WebApp.Driver);
+            resendEmailConfirmationPage.EnterEmail(unregisteredEmail)
+                .ClickResendButton();
+
+            RegistrationConfirmationPage registrationConfirmationPage = new(WebApp.Driver);
+            Assert.That(registrationConfirmationPage.IsAlertDisplayed(), "Alert was not displayed on Register confirmation page.");
+            Assert.That(registrationConfirmationPage.AlertText(), Is.EqualTo("Error finding user for unspecified email"));
+        }
 
     }
 }

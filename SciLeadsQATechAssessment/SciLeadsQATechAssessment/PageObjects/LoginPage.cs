@@ -127,9 +127,10 @@ namespace SciLeadsQATechAssessment.PageObjects
         /// </summary>
         public void ClickResendEmailConfirmationLink()
         {
-            _driver.LogClick(LoginLocators.RegisterNewUserLink, "Click Resend email confirmation link");
+            _driver.LogClick(LoginLocators.ResendEmailConfirmationLink, "Click Resend email confirmation link");
 
-            throw new NotImplementedException();
+            ResendEmailConfirmationPage resendEmailConfirmationPage = new(_driver);
+            _driver.WaitUntil(resendEmailConfirmationPage.IsDisplayed);
         }
 
         /// <summary>
