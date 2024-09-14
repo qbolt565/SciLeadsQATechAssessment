@@ -6,12 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SciLeadsQATechAssessment.PageObjects;
+using SciLeadsQATechAssessment.Models;
 
 namespace SciLeadsQATechAssessment
 {
     public class LoginTests
     {
         private WebApp _webApp;
+        private User _knownUser;
+
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        { 
+            _knownUser = TestDataUtils.GetTestUser();
+
+            _webApp = new WebApp();
+            _webApp.Open();
+
+            Workflows workflows = new Workflows();
+            workflows.CreateNewUser(_webApp.Driver, _knownUser);
+
+            _webApp.Close();
+        }
 
         [SetUp]
         public void Setup()
@@ -58,27 +74,10 @@ namespace SciLeadsQATechAssessment
         [Test]
         public void LoginPage_ClickLoginWithKnownEmailButWrongPassword_LoginFails()
         {
-            string email = TestDataUtils.GetTestEmail();
-            string password = "P@33word";
-
-            RegistrationPage registrationPage = new(_webApp.Driver);
-            registrationPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .EnterConfirmPassword(password)
-                .ClickRegister();
-
-            RegistrationConfirmationPage registrationConfirmationPage = new(_webApp.Driver);
-            registrationConfirmationPage.ClickConfirmLink();
-
-            ConfirmPasswordPage confirmPasswordPage = new(_webApp.Driver);
-
-            Assert.That(confirmPasswordPage.IsDisplayed(), "Confirm password page was not displayed after registration confirmed.");
-
             LoginPage loginPage = new(_webApp.Driver);
             loginPage.Open()
-                .EnterEmail(email)
-                .EnterPassword($"!{password}")
+                .EnterEmail(_knownUser.Email)
+                .EnterPassword($"!{_knownUser.Password}")
                 .ClickLogin();
 
             Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."));
