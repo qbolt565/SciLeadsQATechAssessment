@@ -6,7 +6,7 @@ using SciLeadsQATechAssessment.Support;
 using System.Net;
 using System.Security.Principal;
 
-namespace SciLeadsQATechAssessment
+namespace SciLeadsQATechAssessment.Tests
 {
     public class RegistrationTests
     {
@@ -91,7 +91,8 @@ namespace SciLeadsQATechAssessment
                 .EnterConfirmPassword(password)
                 .ClickRegister(waitForRegistrationConfirmationPage: false);
 
-            Assert.Multiple(() => {
+            Assert.Multiple(() =>
+            {
                 Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo("The Email field is not a valid e-mail address."));
                 Assert.That(registrationPage.EmailErrorText, Is.EqualTo("The Email field is not a valid e-mail address."));
             });

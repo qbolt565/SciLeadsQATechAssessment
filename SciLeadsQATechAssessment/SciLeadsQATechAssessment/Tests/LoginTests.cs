@@ -9,7 +9,7 @@ using SciLeadsQATechAssessment.PageObjects;
 using SciLeadsQATechAssessment.Models;
 using SciLeadsQATechAssessment.Support;
 
-namespace SciLeadsQATechAssessment
+namespace SciLeadsQATechAssessment.Tests
 {
     public class LoginTests
     {
@@ -18,7 +18,7 @@ namespace SciLeadsQATechAssessment
 
         [OneTimeSetUp]
         public void OneTimeSetup()
-        { 
+        {
             _knownUser = TestDataUtils.GetTestUser();
 
             _webApp = new WebApp();
@@ -50,7 +50,8 @@ namespace SciLeadsQATechAssessment
 
             loginPage.Open()
                 .ClickLogin();
-            Assert.Multiple(() => {
+            Assert.Multiple(() =>
+            {
                 Assert.That(loginPage.SummaryErrorText, Is.EqualTo("The Email field is required.\r\nThe Password field is required."));
                 Assert.That(loginPage.EmailErrorText, Is.EqualTo("The Email field is required."));
                 Assert.That(loginPage.PasswordErrorText, Is.EqualTo("The Password field is required."));
