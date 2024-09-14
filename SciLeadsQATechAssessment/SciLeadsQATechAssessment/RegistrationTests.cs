@@ -2,6 +2,7 @@ using Microsoft.Win32;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SciLeadsQATechAssessment.PageObjects;
+using SciLeadsQATechAssessment.Support;
 using System.Net;
 using System.Security.Principal;
 

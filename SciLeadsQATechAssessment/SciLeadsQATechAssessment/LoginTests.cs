@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SciLeadsQATechAssessment.PageObjects;
 using SciLeadsQATechAssessment.Models;
+using SciLeadsQATechAssessment.Support;
 
 namespace SciLeadsQATechAssessment
 {

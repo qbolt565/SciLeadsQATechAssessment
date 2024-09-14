@@ -7,7 +7,7 @@ using Bogus;
 using OpenQA.Selenium;
 using SciLeadsQATechAssessment.Models;
 
-namespace SciLeadsQATechAssessment
+namespace SciLeadsQATechAssessment.Support
 {
     /// <summary>
     /// Class for generating test data.

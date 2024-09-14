@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SciLeadsQATechAssessment
+namespace SciLeadsQATechAssessment.Support
 {
     /// <summary>
     /// Class for automating common user actions.
