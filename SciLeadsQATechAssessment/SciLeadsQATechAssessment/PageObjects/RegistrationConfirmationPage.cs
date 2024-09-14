@@ -1,10 +1,10 @@
 ﻿
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SciLeadsQATechAssessment.Locators;
-using SciLeadsQATechAssessment.Support;
+using SciLeadsQATechAssessment.Tests.UI.Locators;
+using SciLeadsQATechAssessment.Tests.UI.Support;
 
-namespace SciLeadsQATechAssessment.PageObjects
+namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 {
     /// <summary>
     /// Page object for managing interations with Registration Confirmation page.

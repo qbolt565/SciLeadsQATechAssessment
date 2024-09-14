@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SciLeadsQATechAssessment.Locators
+namespace SciLeadsQATechAssessment.Tests.UI.Locators
 {
     /// <summary>
     /// Provides locators for all elements contained within the Navigator pane

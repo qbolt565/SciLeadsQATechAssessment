@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SciLeadsQATechAssessment.PageObjects
+namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 {
     /// <summary>
     /// Resposoble for opening and close te Web App

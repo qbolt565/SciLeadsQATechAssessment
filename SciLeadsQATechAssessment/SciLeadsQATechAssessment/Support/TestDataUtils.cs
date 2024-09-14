@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Bogus;
 using OpenQA.Selenium;
-using SciLeadsQATechAssessment.Models;
+using SciLeadsQATechAssessment.Tests.UI.Models;
 
-namespace SciLeadsQATechAssessment.Support
+namespace SciLeadsQATechAssessment.Tests.UI.Support
 {
     /// <summary>
     /// Class for generating test data.

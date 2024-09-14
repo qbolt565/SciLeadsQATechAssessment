@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SciLeadsQATechAssessment.Support
+namespace SciLeadsQATechAssessment.Tests.UI.Support
 {
     /// <summary>
     /// Provides extensions for Selnium WebDriver.

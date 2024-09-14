@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SciLeadsQATechAssessment.PageObjects;
-using SciLeadsQATechAssessment.Models;
-using SciLeadsQATechAssessment.Support;
+using SciLeadsQATechAssessment.Tests.UI.PageObjects;
+using SciLeadsQATechAssessment.Tests.UI.Models;
+using SciLeadsQATechAssessment.Tests.UI.Support;
 
-namespace SciLeadsQATechAssessment.Tests
+namespace SciLeadsQATechAssessment.Tests.UI.Tests
 {
     public class LoginTests : TestBase
     {

@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
-using SciLeadsQATechAssessment.Models;
-using SciLeadsQATechAssessment.PageObjects;
+using SciLeadsQATechAssessment.Tests.UI.Models;
+using SciLeadsQATechAssessment.Tests.UI.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SciLeadsQATechAssessment.Support
+namespace SciLeadsQATechAssessment.Tests.UI.Support
 {
     /// <summary>
     /// Class for automating common user actions.

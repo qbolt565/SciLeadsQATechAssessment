@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
-using SciLeadsQATechAssessment.Locators;
-using SciLeadsQATechAssessment.Support;
-namespace SciLeadsQATechAssessment.PageObjects
+using SciLeadsQATechAssessment.Tests.UI.Locators;
+using SciLeadsQATechAssessment.Tests.UI.Support;
+namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 {
     /// <summary>
     /// Page object for managing interations with Forgot Password Confirmation page.

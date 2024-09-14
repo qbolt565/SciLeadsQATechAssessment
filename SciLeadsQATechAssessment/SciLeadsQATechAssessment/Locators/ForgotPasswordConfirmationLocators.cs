@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace SciLeadsQATechAssessment.Locators
+namespace SciLeadsQATechAssessment.Tests.UI.Locators
 {
     /// <summary>
     /// Provides locators for all elements contained within the Forgot Password Confirmation page.

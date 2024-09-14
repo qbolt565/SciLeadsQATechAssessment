@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
-using SciLeadsQATechAssessment.Locators;
-using SciLeadsQATechAssessment.Models;
-using SciLeadsQATechAssessment.Support;
+using SciLeadsQATechAssessment.Tests.UI.Locators;
+using SciLeadsQATechAssessment.Tests.UI.Models;
+using SciLeadsQATechAssessment.Tests.UI.Support;
 using System.Globalization;
 
-namespace SciLeadsQATechAssessment.PageObjects
+namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 {
     /// <summary>
     /// Page object for managing interations with Weather page.

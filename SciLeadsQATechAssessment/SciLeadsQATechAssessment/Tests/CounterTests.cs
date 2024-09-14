@@ -1,11 +1,11 @@
-﻿using SciLeadsQATechAssessment.PageObjects;
+﻿using SciLeadsQATechAssessment.Tests.UI.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SciLeadsQATechAssessment.Tests
+namespace SciLeadsQATechAssessment.Tests.UI.Tests
 {
     public class CounterTests : TestBase
     {
