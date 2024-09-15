@@ -16,11 +16,11 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         {
             List<DateTime> expectedWeatherDataDates =
             [
-                new DateTime(2024,9,15),
-                new DateTime(2024,9,16),
-                new DateTime(2024,9,17),
-                new DateTime(2024,9,18),
-                new DateTime(2024,9,19)
+                DateTime.Today.AddDays(5),
+                DateTime.Today.AddDays(4),
+                DateTime.Today.AddDays(3),
+                DateTime.Today.AddDays(2),
+                DateTime.Today.AddDays(1)
             ];
 
             LoginPage loginPage = new(WebApp.Driver);
