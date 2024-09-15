@@ -23,6 +23,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Locators
         public static By SaveButton => ButtonLocator("Save");
         public static By SummaryErrorText => By.XPath("//ul[@class='text-danger']");
         public static By SuccessAlert => By.XPath("//div[@class='alert alert-success']");
+        public static By ErrorAlert => By.XPath("//div[@class='alert alert-danger']");
         public static By ManageEmailHeader => By.XPath("//h3[text()='Manage email']");
         public static By PhoneNumberError => InputErrorLocator("Input.PhoneNumber");
         public static By EmailInput => By.XPath("//label[@for='email']/../input");

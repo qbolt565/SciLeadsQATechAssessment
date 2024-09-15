@@ -133,5 +133,16 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
             Assert.That(registrationConfirmationPage.AlertText(), Is.EqualTo("Error finding user for unspecified email"));
         }
 
+        [Test]
+        public void HomePage_SelectAboutLink_DocumentationPageDisplayed()
+        {
+            HomePage homePage = new(WebApp.Driver);
+            homePage.Open()
+                .ClickAboutLink();
+
+            Assert.That(WebApp.Driver.BrowserTabTitles(), Does.Contain("ASP.NET documentation | Microsoft Learn"));
+        }
+
+
     }
 }

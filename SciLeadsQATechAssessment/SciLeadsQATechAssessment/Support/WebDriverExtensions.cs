@@ -184,5 +184,26 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
             IWebElement table = driver.FindElement(locator);
             return table.FindElements(By.XPath("./tbody/tr")).Count;
         }
+
+        /// <summary>
+        /// Returns a list of the titles for all currently open tabs.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <returns>List of the titles for all currently open tabs</returns>
+        public static IList<string> BrowserTabTitles(this IWebDriver driver)
+        {
+            List<string> tabTitles = [];
+
+            IList<string> windowHandles = new List<string>(driver.WindowHandles);
+
+            foreach (var windowHandle in windowHandles)
+            { 
+                driver.SwitchTo().Window(windowHandle);
+                tabTitles.Add(driver.Title);
+            }
+
+            return tabTitles;
+        }
+
     }
 }

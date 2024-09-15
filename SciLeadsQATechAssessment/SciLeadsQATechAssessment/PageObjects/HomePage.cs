@@ -59,5 +59,13 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 
             return this;
         }
+
+        /// <summary>
+        /// Clicks the about link
+        /// </summary>
+        public void ClickAboutLink()
+        { 
+            _driver.LogClick(HomepageLocators.AboutLink, "Click the About link");
+        }
     }
 }

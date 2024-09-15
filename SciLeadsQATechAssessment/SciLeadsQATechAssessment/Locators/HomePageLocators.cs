@@ -9,5 +9,6 @@ namespace SciLeadsQATechAssessment.Tests.UI.Locators
     {
         public static By Header => By.XPath("//h1['Hello, world !!']");
         public static By Article => By.TagName("article");
+        public static By AboutLink => By.LinkText("About");
     }
 }
