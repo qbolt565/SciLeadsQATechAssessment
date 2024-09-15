@@ -1,5 +1,4 @@
-﻿using Bogus.DataSets;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using SciLeadsQATechAssessment.Tests.UI.Locators;
 using SciLeadsQATechAssessment.Tests.UI.Support;
 
