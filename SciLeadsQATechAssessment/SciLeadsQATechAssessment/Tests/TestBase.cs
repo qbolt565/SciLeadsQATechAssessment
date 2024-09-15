@@ -14,6 +14,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         protected WebApp WebApp { get; set; }
         protected User KnownUser { get; set; }
 
+        protected Workflows Workflows { get; set; }
+
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
@@ -22,8 +24,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
             WebApp = new WebApp();
             WebApp.Open();
 
-            Workflows workflows = new Workflows();
-            workflows.CreateNewUser(WebApp.Driver, KnownUser);
+            Workflows = new Workflows(WebApp.Driver);
+            Workflows.CreateNewUser(KnownUser);
 
             WebApp.Close();
         }
@@ -33,6 +35,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         {
             WebApp = new WebApp();
             WebApp.Open();
+            Workflows.UpdateDriver(WebApp.Driver);
         }
 
         [TearDown]

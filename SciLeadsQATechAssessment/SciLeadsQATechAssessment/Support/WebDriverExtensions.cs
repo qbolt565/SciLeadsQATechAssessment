@@ -42,6 +42,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         {
             log.LogInfo(logMessage);
             IWebElement element = driver.FindElement(locator);
+            element.Clear();
             element.SendKeys(inputText);
         }
 
