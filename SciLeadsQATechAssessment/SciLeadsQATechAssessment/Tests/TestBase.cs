@@ -1,11 +1,6 @@
 ﻿using SciLeadsQATechAssessment.Tests.UI.Models;
 using SciLeadsQATechAssessment.Tests.UI.PageObjects;
 using SciLeadsQATechAssessment.Tests.UI.Support;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SciLeadsQATechAssessment.Tests.UI.Tests
 {

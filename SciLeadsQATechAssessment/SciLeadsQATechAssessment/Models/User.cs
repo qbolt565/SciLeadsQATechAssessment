@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SciLeadsQATechAssessment.Tests.UI.Models
+﻿namespace SciLeadsQATechAssessment.Tests.UI.Models
 {
     /// <summary>
     /// Model that represents a user.

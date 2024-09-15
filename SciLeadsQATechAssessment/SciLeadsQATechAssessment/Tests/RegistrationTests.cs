@@ -1,10 +1,5 @@
-using Microsoft.Win32;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using SciLeadsQATechAssessment.Tests.UI.PageObjects;
 using SciLeadsQATechAssessment.Tests.UI.Support;
-using System.Net;
-using System.Security.Principal;
 
 namespace SciLeadsQATechAssessment.Tests.UI.Tests
 {

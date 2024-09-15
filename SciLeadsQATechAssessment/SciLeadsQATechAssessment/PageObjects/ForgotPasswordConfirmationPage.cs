@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SciLeadsQATechAssessment.Tests.UI.Locators;
 using SciLeadsQATechAssessment.Tests.UI.Support;
+
 namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 {
     /// <summary>
