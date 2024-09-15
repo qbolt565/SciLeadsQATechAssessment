@@ -26,7 +26,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         }
 
         /// <summary>
-        /// Performs a click on the given element and logs the given message.
+        /// Clears content of the given controls and type in the given text.
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="locator">Locator for the element that text will be sent to.</param>
@@ -80,7 +80,6 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
                     log.LogWarning($"Encountered StaleElementReferenceException attempting retry.  Attempts remaining:{retryCount}");
                     retryCount--;
                 }
-                retryCount = 0;
             }
 
             return false;
@@ -140,6 +139,12 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
             driver.WaitUntil(driver.IsPageLoaded);
         }
 
+        /// <summary>
+        /// Reads all td tag text from a table and stored it.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="locator">Location of the table.</param>
+        /// <returns>Nested lsit representing the rows of the table and their data.</returns>
         public static List<List<string>> LoadTable(this IWebDriver driver, By locator)
         { 
             log.LogInfo($"Load table");
@@ -162,7 +167,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
                     row.Add(dataElement.Text);
                 }
 
-                table.Add(row);            }
+                table.Add(row);            
+            }
 
             return table;
         }
@@ -172,9 +178,10 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="locator">Locator specifying how to find table.</param>
-        /// <returns></returns>
+        /// <returns>Number of rows in table.</returns>
         public static int TableRowCount(this IWebDriver driver, By locator)
         {
+            log.LogInfo("Get table row count");
             IWebElement table = driver.FindElement(locator);
             return table.FindElements(By.XPath("./tbody/tr")).Count;
         }
@@ -186,6 +193,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <returns>List of the titles for all currently open tabs</returns>
         public static IList<string> BrowserTabTitles(this IWebDriver driver)
         {
+            log.LogInfo($"Check the titles of all currently open browser tabs.");
+
             List<string> tabTitles = [];
 
             IList<string> windowHandles = new List<string>(driver.WindowHandles);

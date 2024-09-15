@@ -3,7 +3,7 @@
 namespace SciLeadsQATechAssessment.Tests.UI.Locators
 {
     /// <summary>
-    /// Provides locators for all elements contained within the Registration page.
+    /// Provides locators for all elements contained within the Home page.
     /// </summary>
     public class HomepageLocators
     {

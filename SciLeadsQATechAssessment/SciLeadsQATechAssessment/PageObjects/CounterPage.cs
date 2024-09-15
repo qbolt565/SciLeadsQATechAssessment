@@ -41,7 +41,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Clicks the Increment button the given number of times.
         /// </summary>
-        /// <param name="n">Number of time to click increment button.</param>
+        /// <param name="n">Number of times to click increment button.</param>
         /// <returns>The same instance of <see cref="CounterPage"/>.</returns>
         public CounterPage ClickIncrementNTimes(int n)
         {
@@ -66,8 +66,9 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Opens the counter page from the Navigation pane.
         /// </summary>
-        /// <param name="isLoggedIn">After selecting conter from navigation bar, if isLoggedIn is true will wait until counter page
-        /// is displayed, otherwise will wait until login page is displayed.</param>
+        /// <param name="isLoggedIn">After selecting conter from navigation bar, if isLoggedIn is true 
+        /// will wait until counter page is displayed, otherwise will wait until login 
+        /// page is displayed.</param>
         /// <returns>The same instance of <see cref="CounterPage"/>.</returns>
         public CounterPage Open(bool isLoggedIn = true)
         {

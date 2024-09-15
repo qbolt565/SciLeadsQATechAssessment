@@ -27,12 +27,12 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         }
 
         /// <summary>
-        /// Click the Confirm Link 
+        /// Click the Confirm Link. 
         /// </summary>
         /// <returns></returns>
         public RegistrationConfirmationPage ClickConfirmLink()
         {
-            _driver.LogClick(RegistrationConfirmationLocators.ConfirmLink, "Click the Confirm link");
+            _driver.LogClick(RegistrationConfirmationLocators.ConfirmLink, "Click the Confirm link.");
 
             ConfirmPasswordPage confirmPasswordPage = new(_driver);
             _driver.WaitUntil(confirmPasswordPage.IsDisplayed);

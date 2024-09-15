@@ -29,7 +29,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// Enter the supplied text into the Email field.
         /// </summary>
         /// <param name="email">Text to be entered into Email field.</param>
-        /// <returns>Returns the same instance of the ForgotPassword Page.</returns>
+        /// <returns>Returns the same instance of the <see cref="ForgotPasswordPage"/>.</returns>
         public ForgotPasswordPage EnterEmail(string email)
         {
             _driver.LogSendText(ForgotPasswordLocators.EmailInput, email, $"Enter {email} into Email field.");

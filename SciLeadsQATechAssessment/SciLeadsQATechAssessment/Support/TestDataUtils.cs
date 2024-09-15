@@ -19,7 +19,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <summary>
         /// Generates random credentials for a user. 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>New test user.</returns>
         public static User GetTestUser()
         {
             return new User() { Email = GetTestEmail(), Password = "P@33word" };

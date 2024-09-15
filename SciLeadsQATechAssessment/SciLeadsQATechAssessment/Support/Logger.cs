@@ -1,5 +1,8 @@
 ﻿namespace SciLeadsQATechAssessment.Tests.UI.Support
 {
+    /// <summary>
+    /// Class for writing log messages.
+    /// </summary>
     public class Logger
     {
         /// <summary>

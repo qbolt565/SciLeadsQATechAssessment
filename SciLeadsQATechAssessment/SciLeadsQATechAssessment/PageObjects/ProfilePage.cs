@@ -19,7 +19,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Returns true if the page is displayed.
         /// </summary>
-        /// <returns>Returns the same instance of the Login page.</returns>
+        /// <returns></returns>
         public bool IsDisplayed()
         {
             return _driver.IsDisplayed(ProfileLocators.Header, "Check Profile page is displayed.");
@@ -30,7 +30,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// Opens the profile page from the Navigation pane.
         /// </summary>
         /// <param name="usermEmail">The user email that is displayed n the navigation pane</param>
-        /// <returns></returns>
+        /// <returns>Returns the same instance of the <see cref="ProfilePage"/>.</returns>
         public ProfilePage Open(string usermEmail)
         {
             NavigationPane navigationPane = new NavigationPane(_driver);
@@ -90,7 +90,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// </summary>
         public void ClickSave()
         {
-            _driver.LogClick(ProfileLocators.SaveButton, "Click the Save button");
+            _driver.LogClick(ProfileLocators.SaveButton, "Click the Save button.");
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <returns>Summary error text.</returns>
         public string SummaryErrorText()
         {
-            return _driver.LogReadText(ProfileLocators.SummaryErrorText, "Read error text shown in error summary.");
+            return _driver.LogReadText(ProfileLocators.SummaryErrorText, "Read text shown in error summary.");
         }
 
         /// <summary>

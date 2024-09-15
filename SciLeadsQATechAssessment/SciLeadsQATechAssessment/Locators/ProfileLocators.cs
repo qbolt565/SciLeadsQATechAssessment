@@ -3,7 +3,7 @@
 namespace SciLeadsQATechAssessment.Tests.UI.Locators
 {
     /// <summary>
-    /// Provides locators for all elements contained within the Navigator pane
+    /// Provides locators for all elements contained within the Profile page
     /// </summary>
     public class ProfileLocators
     {

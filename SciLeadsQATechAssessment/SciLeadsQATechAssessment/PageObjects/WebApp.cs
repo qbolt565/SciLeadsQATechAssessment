@@ -4,7 +4,7 @@ using OpenQA.Selenium.Chrome;
 namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
 {
     /// <summary>
-    /// Resposoble for opening and close te Web App
+    /// Responsible for opening and closing the Web App
     /// </summary>
     public class WebApp
     {

@@ -19,7 +19,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Returns true if the page is displayed.
         /// </summary>
-        /// <returns>Returns the same instance of the Login page.</returns>
+        /// <returns></returns>
         public bool IsDisplayed()
         {
             return _driver.IsDisplayed(LoginLocators.Header, "Check Login page is displayed.");
@@ -100,34 +100,34 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         }
 
         /// <summary>
-        /// Clicks the Forgot your password link
+        /// Clicks the Forgot your password link.
         /// </summary>
         /// <returns></returns>
         public void ClickForgotYourPassword()
         {
-            _driver.LogClick(LoginLocators.ForgotPasswordLink, "Click Forgot your password link");
+            _driver.LogClick(LoginLocators.ForgotPasswordLink, "Click Forgot your password link.");
 
             ForgotPasswordPage forgotPasswordPage = new(_driver);
             _driver.WaitUntil(forgotPasswordPage.IsDisplayed);
         }
 
         /// <summary>
-        /// Clicks the Register as a new user link
+        /// Clicks the Register as a new user link.
         /// </summary>
         public void ClickRegisterAsANewUser()
         {
-            _driver.LogClick(LoginLocators.RegisterNewUserLink, "Click Register as a new user link");
+            _driver.LogClick(LoginLocators.RegisterNewUserLink, "Click Register as a new user link.");
 
             RegistrationPage registrationPage = new(_driver);
             _driver.WaitUntil(registrationPage.IsDisplayed);
         }
 
         /// <summary>
-        /// Clicks the Resend email confirmation link
+        /// Clicks the Resend email confirmation link.
         /// </summary>
         public void ClickResendEmailConfirmationLink()
         {
-            _driver.LogClick(LoginLocators.ResendEmailConfirmationLink, "Click Resend email confirmation link");
+            _driver.LogClick(LoginLocators.ResendEmailConfirmationLink, "Click Resend email confirmation link.");
 
             ResendEmailConfirmationPage resendEmailConfirmationPage = new(_driver);
             _driver.WaitUntil(resendEmailConfirmationPage.IsDisplayed);

@@ -42,7 +42,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// </summary>
         public void Weather()
         {
-            _driver.LogClick(NavigationPaneLocators.Weather, "Select Regsiter from Weather pane.");
+            _driver.LogClick(NavigationPaneLocators.Weather, "Select Weather from Navigation pane.");
         }
 
         /// <summary>

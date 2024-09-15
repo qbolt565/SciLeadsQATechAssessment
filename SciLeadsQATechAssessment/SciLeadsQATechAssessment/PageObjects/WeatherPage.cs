@@ -56,8 +56,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Opens the Weather page from the Navigation pane.
         /// </summary>
-        /// <param name="isLoggedIn">After selecting conter from navigation bar, if isLoggedIn is true will wait until Weather page
-        /// is displayed, otherwise will wait until login page is displayed.</param>
+        /// <param name="isLoggedIn">After selecting conter from navigation bar, if isLoggedIn is true 
+        /// will wait until Weather page is displayed, otherwise will wait until login page is displayed.</param>
         /// <returns>The same instance of <see cref="WeatherPage"/>.</returns>
         public WeatherPage Open(bool isLoggedIn = true)
         {

@@ -66,7 +66,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// Enter the supplied text into the Password field.
         /// </summary>
         /// <param name="password">Text to be entered into Password field.</param>
-        /// <returns>Returns the same instance of the Registration page.</returns>
+        /// <returns>Returns the same instance of <see cref="RegistrationPage"/>.</returns>
         public RegistrationPage EnterPassword(string password)
         {
             _driver.LogSendText(RegistrationLocators.PasswordInput, password, $"Enter {password} into Password field.");
@@ -123,7 +123,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Opens the registration page from the Navigation pane.
         /// </summary>
-        /// <returns>Returns the same instance of the Registration page.</returns>
+        /// <returns>Returns the same instance of the 
+        /// <returns>Returns the same instance of <see cref="RegistrationPage"/>.</returns>
         public RegistrationPage Open()
         {
             NavigationPane navigationPane = new NavigationPane(_driver);

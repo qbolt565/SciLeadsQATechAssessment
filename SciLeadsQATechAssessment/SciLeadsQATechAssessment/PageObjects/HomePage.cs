@@ -19,7 +19,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// <summary>
         /// Returns true if the page is displayed.
         /// </summary>
-        /// <returns>Returns the same instance of the Login page.</returns>
+        /// <returns></returns>
         public bool IsDisplayed()
         {
             return _driver.IsDisplayed(HomepageLocators.Header, "Check Home page is displayed.");
