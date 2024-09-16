@@ -7,11 +7,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         [Test]
         public void CounterPage_UserLoggedInClicksIncrementMultipleTimes_CounterValueReflectsNumberOfClicks()
         {
-            LoginPage loginPage = new(WebApp.Driver);
-            loginPage.Open()
-                .EnterEmail(KnownUser.Email)
-                .EnterPassword(KnownUser.Password)
-                .ClickLogin();
+            Workflows.LoginAs(KnownUser);
 
             CounterPage counterPage = new(WebApp.Driver);
             counterPage.Open();
@@ -27,11 +23,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         public void CounterPage_UserLoggedInClickIncrementThenChangePage_CounterValuePersists()
         {
             int targetCounterValue = 5;
-            LoginPage loginPage = new(WebApp.Driver);
-            loginPage.Open()
-                .EnterEmail(KnownUser.Email)
-                .EnterPassword(KnownUser.Password)
-                .ClickLogin();
+            Workflows.LoginAs(KnownUser);
 
             CounterPage counterPage = new(WebApp.Driver);
             counterPage.Open()
@@ -51,11 +43,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         public void CounterPage_UserLoggedInClickIncrementThenLogoutAndLogin_CounterValueResets()
         {
             int targetCounterValue = 5;
-            LoginPage loginPage = new(WebApp.Driver);
-            loginPage.Open()
-                .EnterEmail(KnownUser.Email)
-                .EnterPassword(KnownUser.Password)
-                .ClickLogin();
+            Workflows.LoginAs(KnownUser);
 
             CounterPage counterPage = new(WebApp.Driver);
             counterPage.Open()
@@ -66,10 +54,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
             NavigationPane navigationPane = new(WebApp.Driver);
             navigationPane.Open().Logout();
 
-            loginPage.Open()
-                .EnterEmail(KnownUser.Email)
-                .EnterPassword(KnownUser.Password)
-                .ClickLogin();
+            Workflows.LoginAs(KnownUser);
 
             counterPage.Open();
 

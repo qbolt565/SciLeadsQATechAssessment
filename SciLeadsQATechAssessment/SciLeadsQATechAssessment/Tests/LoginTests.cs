@@ -12,11 +12,12 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
 
             loginPage.Open()
                 .ClickLogin();
+
             Assert.Multiple(() =>
             {
-                Assert.That(loginPage.SummaryErrorText, Is.EqualTo("The Email field is required.\r\nThe Password field is required."));
-                Assert.That(loginPage.EmailErrorText, Is.EqualTo("The Email field is required."));
-                Assert.That(loginPage.PasswordErrorText, Is.EqualTo("The Password field is required."));
+                Assert.That(loginPage.SummaryErrorText, Is.EqualTo("The Email field is required.\r\nThe Password field is required."), "Expected summary error text not displayed.");
+                Assert.That(loginPage.EmailErrorText, Is.EqualTo("The Email field is required."), "Expected email error not shown.");
+                Assert.That(loginPage.PasswordErrorText, Is.EqualTo("The Password field is required."), "Expected password error not shown.");
             });
         }
 
@@ -32,7 +33,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterPassword(password)
                 .ClickLogin();
 
-            Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."));
+            Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."), "Invalid login error not displayed.");
         }
 
         [Test]
@@ -44,7 +45,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterPassword($"!{KnownUser.Password}")
                 .ClickLogin();
 
-            Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."));
+            Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."), "INvalid login error not displayed.");
         }
 
         [Test]

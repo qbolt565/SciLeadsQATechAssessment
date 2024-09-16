@@ -1,3 +1,4 @@
+using SciLeadsQATechAssessment.Tests.UI.Models;
 using SciLeadsQATechAssessment.Tests.UI.PageObjects;
 using SciLeadsQATechAssessment.Tests.UI.Support;
 
@@ -7,53 +8,34 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
     {
         public void RegistrationPage_EnterValidEmailAndPasswordThenConfirm_CanLoginWithNewCredentials()
         {
-            string email = TestDataUtils.GetTestEmail();
-            string password = "P@33word";
+            User uniqueUser = TestDataUtils.GetTestUser();
 
-            RegistrationPage registrationPage = new(WebApp.Driver);
-            registrationPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .EnterConfirmPassword(password)
-                .ClickRegister();
-
-            RegistrationConfirmationPage registrationConfirmationPage = new(WebApp.Driver);
-            registrationConfirmationPage.ClickConfirmLink();
+            Workflows.CreateNewUser(uniqueUser);
 
             ConfirmPasswordPage confirmPasswordPage = new(WebApp.Driver);
-
             Assert.That(confirmPasswordPage.IsDisplayed(), "Confirm password page was not displayed after registration confirmed.");
 
-            LoginPage loginPage = new(WebApp.Driver);
-            loginPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .ClickLogin();
+            Workflows.LoginAs(uniqueUser);
 
             HomePage homePage = new(WebApp.Driver);
-
-            Assert.That(homePage.IsLoggedIn(email), "The user was not successfully logged in.");
+            Assert.That(homePage.IsLoggedIn(uniqueUser.Email), "The user was not successfully logged in.");
         }
 
         [Test]
         public void RegistrationPage_EnterValidEmailAndPasswordDoNotConfirm_CannotLoginWithNewCredentials()
         {
-            string email = TestDataUtils.GetTestEmail();
-            string password = "P@33word";
+            User uniqueUser = TestDataUtils.GetTestUser();
 
             RegistrationPage registrationPage = new(WebApp.Driver);
             registrationPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .EnterConfirmPassword(password)
+                .EnterEmail(uniqueUser.Email)
+                .EnterPassword(uniqueUser.Password)
+                .EnterConfirmPassword(uniqueUser.Password)
                 .ClickRegister();
 
-            LoginPage loginPage = new(WebApp.Driver);
-            loginPage.Open()
-                .EnterEmail(email)
-                .EnterPassword(password)
-                .ClickLogin();
+            Workflows.LoginAs(uniqueUser);
 
+            LoginPage loginPage = new(WebApp.Driver);
             Assert.That(loginPage.AlertText, Is.EqualTo("Error: Invalid login attempt."), "Expected error message was not dislayed when attempting to login non confirmed user.");
         }
 
@@ -72,8 +54,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo("The Email field is not a valid e-mail address."));
-                Assert.That(registrationPage.EmailErrorText, Is.EqualTo("The Email field is not a valid e-mail address."));
+                Assert.That(registrationPage.SummaryErrorText(), Is.EqualTo("The Email field is not a valid e-mail address."), "Expected error not shown in summary error text.");
+                Assert.That(registrationPage.EmailErrorText, Is.EqualTo("The Email field is not a valid e-mail address."), "Expected error not shown next to email field.");
             });
         }
 
@@ -92,7 +74,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterConfirmPassword(password)
                 .ClickRegister(waitForRegistrationConfirmationPage: false);
 
-            Assert.That(registrationPage.AlertText(), Is.EqualTo(error));
+            Assert.That(registrationPage.AlertText(), Is.EqualTo(error), "Expected error not displayed in alert box.");
         }
 
         [TestCase("P@33wor", "The Password must be at least 8 and at max 100 characters long.", TestName = "Regsiter with password that is too short.")]
@@ -110,8 +92,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(registrationPage.PasswordErrorText, Is.EqualTo(error));
-                Assert.That(registrationPage.SummaryErrorText(), Does.EndWith(error));
+                Assert.That(registrationPage.PasswordErrorText, Is.EqualTo(error), "Expected error not shown next to Password field.");
+                Assert.That(registrationPage.SummaryErrorText(), Does.EndWith(error), "Expected error not shown in summary error text.");
             });
         }
 
@@ -132,8 +114,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(registrationPage.PasswordConfirmErrorText, Is.EqualTo(error));
-                Assert.That(registrationPage.SummaryErrorText(), Does.EndWith(error));
+                Assert.That(registrationPage.PasswordConfirmErrorText, Is.EqualTo(error), "Expected error not shown next to Password Confirm field.");
+                Assert.That(registrationPage.SummaryErrorText(), Does.EndWith(error), "Expected error not shown in summary error text.");
             });
         }
 
@@ -147,7 +129,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterConfirmPassword(KnownUser.Password)
                 .ClickRegister(waitForRegistrationConfirmationPage: false);
 
-            Assert.That(registrationPage.AlertText(), Is.EqualTo($"Error: Username '{KnownUser.Email}' is already taken."));
+            Assert.That(registrationPage.AlertText(), Is.EqualTo($"Error: Username '{KnownUser.Email}' is already taken."), "Expected error not displayed in alert box.");
         }
 
     }

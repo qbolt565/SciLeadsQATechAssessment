@@ -8,7 +8,6 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
     {
         protected WebApp WebApp { get; set; }
         protected User KnownUser { get; set; }
-
         protected Workflows Workflows { get; set; }
 
         [OneTimeSetUp]
@@ -28,8 +27,11 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
         [SetUp]
         public void Setup()
         {
+            // Launch Chrome driver and navigate to test app
             WebApp = new WebApp();
             WebApp.Open();
+            
+            // Ensure the Workflows instance has access to the correct webdriver.
             Workflows.UpdateDriver(WebApp.Driver);
         }
 

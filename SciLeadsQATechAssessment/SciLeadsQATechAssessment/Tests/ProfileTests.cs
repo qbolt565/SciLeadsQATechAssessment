@@ -17,7 +17,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterPhoneNumber("07837405668")
                 .ClickSave();
 
-            Assert.That(profilePage.SuccessAlertMessageText, Is.EqualTo("Your profile has been updated"));
+            Assert.That(profilePage.SuccessAlertMessageText, Is.EqualTo("Your profile has been updated"), "Phone number updated message not displayed.");
         }
 
         [Test]
@@ -32,8 +32,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .ClickSave();
 
             Assert.Multiple(() => {
-                Assert.That(profilePage.SummaryErrorText, Does.EndWith("The Phone number field is not a valid phone number."));
-                Assert.That(profilePage.PhoneNumberErrorText, Is.EqualTo("The Phone number field is not a valid phone number."));
+                Assert.That(profilePage.SummaryErrorText, Does.EndWith("The Phone number field is not a valid phone number."), "Valid phone number error not shown in summary.");
+                Assert.That(profilePage.PhoneNumberErrorText, Is.EqualTo("The Phone number field is not a valid phone number."), "Valid phone number error not shown next to field.");
             });
         }
 
@@ -50,7 +50,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterNewEmail(TestDataUtils.GetTestEmail())
                 .ClickChangeEmail();
 
-            Assert.That(profilePage.SuccessAlertMessageText(), Is.EqualTo("Confirmation link to change email sent. Please check your email."));
+            Assert.That(profilePage.SuccessAlertMessageText(), Is.EqualTo("Confirmation link to change email sent. Please check your email."), "Chane email success message not displayed.");
 
             NavigationPane navigationPane = new(WebApp.Driver);
             navigationPane.Logout();
@@ -72,8 +72,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .ClickChangeEmail();
 
             Assert.Multiple(() => {
-                Assert.That(profilePage.SummaryErrorText, Does.EndWith("The New email field is not a valid e-mail address."));
-                Assert.That(profilePage.NewEmailErrorText, Is.EqualTo("The New email field is not a valid e-mail address."));
+                Assert.That(profilePage.SummaryErrorText, Does.EndWith("The New email field is not a valid e-mail address."), "Invalid email error not shown in summary.");
+                Assert.That(profilePage.NewEmailErrorText, Is.EqualTo("The New email field is not a valid e-mail address."), "Invalid email error not shown next to field.");
             });
         }
 
@@ -88,7 +88,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterNewEmail(KnownUser.Email)
                 .ClickChangeEmail();
 
-            Assert.That(profilePage.SuccessAlertMessageText(), Is.EqualTo("Your email is unchanged."));
+            Assert.That(profilePage.SuccessAlertMessageText(), Is.EqualTo("Your email is unchanged."),"Your email is unhcnaged message is not displayed.");
         }
 
         [Test]
@@ -138,8 +138,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(profilePage.NewPasswordErrorText, Is.EqualTo(error));
-                Assert.That(profilePage.SummaryErrorText(), Does.EndWith(error));
+                Assert.That(profilePage.NewPasswordErrorText, Is.EqualTo(error), $"{error} not displayed next to new password field");
+                Assert.That(profilePage.SummaryErrorText(), Does.EndWith(error), $"{error} not displayed in summary text.");
             });
         }
 
@@ -159,7 +159,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterConfirmPassword(newPassword)
                 .ClickUpdatePassword();
 
-            Assert.That(profilePage.ErrorAlertMessageText, Is.EqualTo(error));
+            Assert.That(profilePage.ErrorAlertMessageText, Is.EqualTo(error), $"{error} not displayed.");
         }
 
         [Test]
@@ -177,8 +177,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(profilePage.ConfirmPasswordErrorText(), Is.EqualTo("The new password and confirmation password do not match."));
-                Assert.That(profilePage.SummaryErrorText(), Does.EndWith("The new password and confirmation password do not match."));
+                Assert.That(profilePage.ConfirmPasswordErrorText(), Is.EqualTo("The new password and confirmation password do not match."), "Error not displayed next to confirm password field.");
+                Assert.That(profilePage.SummaryErrorText(), Does.EndWith("The new password and confirmation password do not match."), "Error not displayed in summart text.");
             });
         }
 
@@ -195,7 +195,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 .EnterConfirmPassword("NewP@33word")
                 .ClickUpdatePassword();
 
-            Assert.That(profilePage.ErrorAlertMessageText, Is.EqualTo("Error: Incorrect password."));
+            Assert.That(profilePage.ErrorAlertMessageText, Is.EqualTo("Error: Incorrect password."), "Incorrect password error not displayed.");
         }
 
     }

@@ -17,11 +17,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Tests
                 DateTime.Today.AddDays(1)
             ];
 
-            LoginPage loginPage = new(WebApp.Driver);
-            loginPage.Open()
-                .EnterEmail(KnownUser.Email)
-                .EnterPassword(KnownUser.Password)
-                .ClickLogin();
+            Workflows.LoginAs(KnownUser);
 
             WeatherPage weatherPage = new(WebApp.Driver);
             weatherPage.Open();
