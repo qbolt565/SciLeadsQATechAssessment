@@ -9,8 +9,6 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
     /// </summary>
     public static class WebDriverExtensions
     {
-        private static Logger log = new Logger();
-
         /// <summary>
         /// Performans a click on the given element and logs the given message.
         /// </summary>
@@ -19,7 +17,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <param name="logMessage">Message to be logged.</param>
         public static void LogClick(this IWebDriver driver, By locator, string logMessage)
         {
-            log.LogInfo(logMessage);
+            Logger.Instance.LogInfo(logMessage);
             IWebElement element = driver.FindElement(locator);
             new Actions(driver).MoveToElement(element);
             element.Click();
@@ -34,7 +32,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <param name="logMessage">Message to be logged.</param>
         public static void LogSendText(this IWebDriver driver, By locator, string inputText, string logMessage)
         {
-            log.LogInfo(logMessage);
+            Logger.Instance.LogInfo(logMessage);
             IWebElement element = driver.FindElement(locator);
             element.Clear();
             element.SendKeys(inputText);
@@ -49,7 +47,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <returns>Inner text of the element.</returns>
         public static string LogReadText(this IWebDriver driver, By locator, string logMessage)
         {
-            log.LogInfo(logMessage);
+            Logger.Instance.LogInfo(logMessage);
             IWebElement element = driver.FindElement(locator);
             return element.Text;    
         }
@@ -63,7 +61,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <returns>True if element is displayed.</returns>
         public static bool IsDisplayed(this IWebDriver driver, By locator, string logMessage)
         {
-            log.LogInfo(logMessage);
+            Logger.Instance.LogInfo(logMessage);
             int retryCount = 3;
 
             while (retryCount > 0)
@@ -77,7 +75,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
                 }
                 catch (StaleElementReferenceException) 
                 {
-                    log.LogWarning($"Encountered StaleElementReferenceException attempting retry.  Attempts remaining:{retryCount}");
+                    Logger.Instance.LogWarning($"Encountered StaleElementReferenceException attempting retry.  Attempts remaining:{retryCount}");
                     retryCount--;
                 }
             }
@@ -135,7 +133,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
 
         public static void WaitForPageToLoad(this IWebDriver driver, int timeout = 10)
         {
-            log.LogInfo("Wait for page to load");
+            Logger.Instance.LogInfo("Wait for page to load");
             driver.WaitUntil(driver.IsPageLoaded);
         }
 
@@ -147,7 +145,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <returns>Nested lsit representing the rows of the table and their data.</returns>
         public static List<List<string>> LoadTable(this IWebDriver driver, By locator)
         { 
-            log.LogInfo($"Load table");
+            Logger.Instance.LogInfo($"Load table");
 
             List<List<string>> table = [];
 
@@ -181,7 +179,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <returns>Number of rows in table.</returns>
         public static int TableRowCount(this IWebDriver driver, By locator)
         {
-            log.LogInfo("Get table row count");
+            Logger.Instance.LogInfo("Get table row count");
             IWebElement table = driver.FindElement(locator);
             return table.FindElements(By.XPath("./tbody/tr")).Count;
         }
@@ -193,7 +191,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.Support
         /// <returns>List of the titles for all currently open tabs</returns>
         public static IList<string> BrowserTabTitles(this IWebDriver driver)
         {
-            log.LogInfo($"Check the titles of all currently open browser tabs.");
+            Logger.Instance.LogInfo($"Check the titles of all currently open browser tabs.");
 
             List<string> tabTitles = [];
 

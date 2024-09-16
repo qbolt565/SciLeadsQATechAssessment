@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework.Internal;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
@@ -23,6 +24,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         /// </summary>
         public void Open()
         {
+            Support.Logger.Instance.LogInfo("Opening browser.");
             _driver.Navigate().GoToUrl(APPURL);
         }
 
@@ -33,6 +35,8 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
         {
             _driver.Close(); 
             _driver.Quit();
+
+            Support.Logger.Instance.LogInfo("Browser closed.");
         }
     }
 }
