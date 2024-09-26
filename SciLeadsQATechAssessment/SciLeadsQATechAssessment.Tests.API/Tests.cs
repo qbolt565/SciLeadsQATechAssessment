@@ -6,17 +6,7 @@ namespace SciLeadsQATechAssessment.Tests.API
     public class Tests
     {
         private RestClient _client;
-        /** public Competition(string baseUrl) 
-        { 
-            RestClientOptions clientOptions = new RestClientOptions(baseUrl);
-            _client = new RestClient(clientOptions);
-        }
-
-        public RestResponse GetAll()
-        {
-            var request = new RestRequest("Competition");
-            return _client.GetAsync(request).Result;
-        }*/
+        
         [SetUp]
         public void Setup()
         {
