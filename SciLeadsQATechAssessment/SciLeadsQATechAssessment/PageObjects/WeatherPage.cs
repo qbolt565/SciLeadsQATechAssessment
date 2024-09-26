@@ -41,7 +41,7 @@ namespace SciLeadsQATechAssessment.Tests.UI.PageObjects
             {
                 WeatherItem weatherItem = new() 
                 { 
-                    Date = DateTime.ParseExact(item[0], "M/dd/yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.ParseExact(item[0], "M/d/yyyy", CultureInfo.InvariantCulture),
                     TempCelcius = Convert.ToInt32(item[1]),
                     TempFahrenheit = Convert.ToInt32(item[2]),
                     Summary = item[3]
